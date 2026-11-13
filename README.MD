@@ -1,65 +1,118 @@
-Oficios Barriales: documentación del proyecto
-Aplicación web para encontrar gasistas, electricistas, plomeros, costureras y otros oficios en el barrio, en Río Cuarto, Córdoba. Prototipo con datos ficticios.
-1. Descripción general
-Oficios Barriales conecta a vecinos que necesitan un arreglo con vecinos que tienen un oficio. Cada trabajador tiene una ficha con su barrio, experiencia, disponibilidad, formas de pago y opiniones de otros vecinos. El contacto es directo, por teléfono o WhatsApp.
-La app también permite pagar un trabajo (de forma simulada), intercambiar servicios mediante trueque y registrarse como empleado o empleador.
-2. Problema y objetivos
-Problema: encontrar a alguien de confianza para un arreglo en casa suele depender de recomendaciones informales, y quienes tienen un oficio no tienen un lugar donde mostrarse.
-Objetivos:
-• Facilitar que los vecinos encuentren oficios cerca de su casa.
-• Dar visibilidad a trabajadores independientes del barrio.
-• Generar confianza mediante opiniones y matrícula al día.
-• Permitir otras formas de acuerdo, como el trueque de servicios.
-• Ofrecer una interfaz clara, con botones grandes y textos simples, pensada también para personas mayores.
-3. Tecnologías utilizadas
-Tecnología
-Uso
-React 18
-Interfaz y componentes
-Vite 5
-Servidor de desarrollo y compilación
-React Router 6 (HashRouter)
-Navegación entre pantallas
-Tailwind CSS 3
-Estilos y sistema de diseño
-lucide-react
-Íconos
-localStorage
-Guardado de datos en el navegador
-Fuente Inter
-Tipografía
-No tiene servidor ni base de datos: todo se guarda en el navegador de quien usa la app.
-4. Funcionalidades
-4.1 Inicio
-Banner de bienvenida con buscador de texto y selector de barrio, contadores (vecinos, oficios y barrios), grilla de los 8 oficios, los tres vecinos mejor valorados del barrio elegido, sección "Cómo funciona" y acceso al trueque.
-4.2 Buscar
-Directorio de vecinos con filtros por oficio, barrio, búsqueda por texto y tipo (todos, con matrícula, con trueque). Los resultados se ordenan por calificación.
-4.3 Ficha del vecino
-Datos del trabajador, calificación promedio, insignias de "Matrícula al día" y "Acepta trueque", botones para llamar o escribir por WhatsApp, formas de pago y opiniones. Cualquier persona puede dejar una opinión con estrellas. En desktop se muestra en dos columnas.
-4.4 Trueque de servicios
-Lista de vecinos que cambian su trabajo por otro oficio, con filtro por lo que buscan y botón para proponer el intercambio por WhatsApp.
-4.5 Pagos de servicios
-Formulario para pagarle a un vecino: se elige a quién, el monto, un detalle opcional y el medio de pago (solo los que ese vecino acepta: efectivo, transferencia o Mercado Pago). Al pagar se genera un comprobante con número de operación y queda un historial con el total. Es una simulación: no se mueve dinero real.
-4.6 Perfil
-Selector entre dos roles:
-• Empleado: publica su oficio con nombre, oficio, barrio, WhatsApp, descripción, si acepta trueque y si tiene matrícula. Puede ver cómo lo ven los demás o quitar su perfil. También ve los pedidos de trabajo de su oficio en su barrio.
-• Empleador: publica pedidos de trabajo (oficio, barrio, título, detalles y urgencia), los administra y puede ir directo al listado de vecinos de ese oficio.
-5. Estructura del proyecto
-oficios-barriales/
+<p align="center">
+  <img src="public/logo.svg" alt="Logo de Oficios Barriales" width="96" />
+</p>
+
+<h1 align="center">Oficios Barriales</h1>
+
+<p align="center">
+  Encontrá gasistas, electricistas, plomeros, costureras y otros oficios de tu barrio.<br />
+  Aplicación web hecha con React, pensada para Río Cuarto, Córdoba.
+</p>
+
+<p align="center">
+  <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" />
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white" />
+  <img alt="Estado" src="https://img.shields.io/badge/estado-prototipo-C2552D" />
+</p>
+
+<p align="center">
+  <img src="public/captura-desktop.png" alt="Pantalla de inicio en computadora" width="62%" />
+  <img src="public/captura-mobile.png" alt="Pantalla de inicio en celular" width="20%" />
+</p>
+
+## Índice
+
+- [Sobre el proyecto](#sobre-el-proyecto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologías](#tecnologías)
+- [Cómo ejecutarlo](#cómo-ejecutarlo)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Rutas](#rutas)
+- [Datos y almacenamiento](#datos-y-almacenamiento)
+- [Diseño](#diseño)
+- [Limitaciones y próximos pasos](#limitaciones-y-próximos-pasos)
+
+## Sobre el proyecto
+
+Conseguir a alguien de confianza para un arreglo en casa suele depender del boca a boca, y los trabajadores independientes no tienen un lugar donde mostrarse. **Oficios Barriales** conecta a vecinos que necesitan un servicio con vecinos que tienen un oficio, con contacto directo por teléfono o WhatsApp.
+
+La interfaz usa botones grandes y textos simples, para que también sea cómoda para personas mayores.
+
+> Es un prototipo con datos ficticios, hecho con fines educativos. No usa servidor ni base de datos.
+
+## Funcionalidades
+
+| Sección | Qué permite |
+|---|---|
+| **Inicio** | Buscador de texto, selector de barrio, 8 oficios, vecinos mejor valorados y acceso al trueque |
+| **Buscar** | Directorio con filtros por oficio, barrio, texto, matrícula y trueque, ordenado por calificación |
+| **Ficha del vecino** | Descripción, experiencia, disponibilidad, formas de pago, opiniones con estrellas, y botones para llamar o escribir por WhatsApp |
+| **Trueque** | Vecinos que cambian su trabajo por otro oficio, con propuesta directa por WhatsApp |
+| **Pagos** | Pago simulado a un vecino con monto, detalle y medio de pago; genera un comprobante e historial |
+| **Perfil** | Elección entre **empleado** (publica su oficio y ve pedidos de trabajo) y **empleador** (publica y administra pedidos) |
+
+### Detalles
+
+- **Oficios:** gasista, electricista, plomero, costurera, carpintero, pintor, jardinero y albañil.
+- **Barrios:** Banda Norte, Alberdi, Las Delicias, Fénix, Bimaco, Obrero, Villa Golf y Macrocentro.
+- **Pagos:** solo se ofrecen los medios que acepta cada vecino (efectivo, transferencia o Mercado Pago). No se mueve dinero real.
+- **Opiniones:** cualquier persona puede dejar una; el promedio se recalcula al instante.
+- **Insignias:** "Matrícula al día" y "Acepta trueque".
+
+## Tecnologías
+
+- [React 18](https://react.dev/) para la interfaz
+- [Vite 5](https://vitejs.dev/) como servidor de desarrollo y compilador
+- [React Router 6](https://reactrouter.com/) con `HashRouter`, para navegar sin configurar el servidor
+- [Tailwind CSS 3](https://tailwindcss.com/) para los estilos
+- [lucide-react](https://lucide.dev/) para los íconos
+- `localStorage` para guardar los datos en el navegador
+
+## Cómo ejecutarlo
+
+Necesitás [Node.js](https://nodejs.org/) 18 o superior.
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/MateeGonzaa/efiInterfaz.git
+cd efiInterfaz
+
+# 2. Instalar las dependencias
+npm install
+
+# 3. Iniciar el servidor de desarrollo
+npm run dev
+```
+
+Abrí la dirección que muestra la terminal (normalmente `http://localhost:5173`).
+
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Inicia el servidor de desarrollo |
+| `npm run build` | Genera la versión final en la carpeta `dist` |
+| `npm run preview` | Prueba localmente la versión generada |
+
+## Estructura del proyecto
+
+```
 ├── index.html
 ├── package.json
-├── tailwind.config.js
+├── tailwind.config.js        paleta y tipografía
 ├── vite.config.js
-├── public/favicon.svg
+├── public/
+│   └── favicon.svg
 └── src/
     ├── main.jsx
-    ├── App.jsx              rutas y títulos
-    ├── index.css            estilos base y componentes
-    ├── context/AppContext.jsx   estado global
-    ├── data/seed.js         oficios, barrios y datos de ejemplo
+    ├── App.jsx               rutas y títulos de página
+    ├── index.css             estilos base y clases reutilizables
+    ├── context/
+    │   └── AppContext.jsx    estado global y guardado en el navegador
+    ├── data/
+    │   └── seed.js           oficios, barrios y datos de ejemplo
     ├── components/
-    │   ├── Layout.jsx       barras de navegación y pie
-    │   └── ui.jsx           logo, tarjetas, estrellas, botones
+    │   ├── Layout.jsx        barras de navegación y pie de página
+    │   └── ui.jsx            logo, tarjetas, estrellas y botones de contacto
     └── pages/
         ├── Inicio.jsx
         ├── Buscar.jsx
@@ -67,43 +120,58 @@ oficios-barriales/
         ├── Trueque.jsx
         ├── Pagos.jsx
         └── MiPerfil.jsx
-6. Rutas
-Ruta
-Pantalla
-/
-Inicio
-/buscar
-Directorio con filtros
-/vecino/:id
-Ficha de un vecino
-/trueque
-Trueque de servicios
-/pagos
-Pagos de servicios
-/mi-perfil
-Perfil de empleado o empleador
-Las rutas anteriores /sumate y /perfil/:id redirigen a las nuevas.
-7. Datos y estado
-Datos de ejemplo (seed.js): 8 oficios (gasista, electricista, plomero, costurera, carpintero, pintor, jardinero y albañil), 8 barrios (Banda Norte, Alberdi, Las Delicias, Fénix, Bimaco, Obrero, Villa Golf y Macrocentro), 12 vecinos ficticios con reseñas y 6 pedidos de trabajo de ejemplo.
-Estado global (AppContext): guarda en localStorage el barrio elegido, los perfiles creados, las opiniones nuevas, el usuario y su rol, los pedidos propios y los pagos. Si el navegador tenía guardado un barrio de una versión anterior (Jardín o Los Almendros), se convierte automáticamente a Bimaco o Macrocentro.
-Calificaciones: el promedio de estrellas se calcula a partir de todas las opiniones, las de ejemplo y las nuevas.
-8. Diseño
-• Paleta: crema (#F7F2E9) de fondo, verde bosque (#1F4D3A) como color principal, terracota (#C2552D) para acciones destacadas y trueque, y verde de llamada (#16803F) para contactar.
-• Tipografía: Inter, con texto base de 18 px para que sea fácil de leer.
-• Logo: un pin de barrio con una tuerca adentro, que une "oficio" con "en tu barrio".
-• Navegación: barra inferior en celulares (Inicio, Buscar, Pagos y Perfil) y barra superior en pantallas grandes.
-• Responsive: los listados pasan de 1 a 2 y 3 columnas, y la ficha del vecino se divide en dos columnas en desktop.
-• Accesibilidad: botones de al menos 52 px, foco visible, etiquetas para lectores de pantalla, mensajes de error claros y respeto por la preferencia de reducir animaciones.
-9. Cómo ejecutarlo
-1.  Instalar Node.js (versión 18 o superior).
-2.  En la carpeta del proyecto, ejecutar npm install.
-3.  Ejecutar npm run dev y abrir la dirección que indica la terminal.
-4.  Para generar la versión final, ejecutar npm run build; el resultado queda en la carpeta dist.
-10. Limitaciones y trabajo futuro
-• Los datos se guardan solo en el navegador y no se comparten entre personas. El siguiente paso sería agregar un servidor y una base de datos.
-• El pago es una simulación; habría que integrar un medio de pago real, como Mercado Pago.
-• Falta un inicio de sesión para verificar la identidad de cada usuario.
-• Las opiniones no se validan: cualquiera puede dejar una. Se podría permitirlas solo a quienes contrataron al vecino.
-• Ideas futuras: mapa de barrios, notificaciones de nuevos pedidos, fotos de trabajos realizados y verificación de matrículas.
-11. Aclaración
-Todos los nombres, teléfonos, opiniones y pedidos son ficticios y están incluidos solo con fines demostrativos.
+```
+
+## Rutas
+
+| Ruta | Pantalla |
+|---|---|
+| `/` | Inicio |
+| `/buscar` | Directorio con filtros (`?oficio=`, `?q=`, `?f=`) |
+| `/vecino/:id` | Ficha de un vecino |
+| `/trueque` | Trueque de servicios |
+| `/pagos` | Pagos de servicios |
+| `/mi-perfil` | Perfil de empleado o empleador |
+
+## Datos y almacenamiento
+
+Los datos de ejemplo (12 vecinos con reseñas y 6 pedidos de trabajo) están en `src/data/seed.js`. Todo lo que crea cada persona se guarda en su propio navegador, con estas claves de `localStorage`:
+
+| Clave | Contenido |
+|---|---|
+| `ob_barrio` | Barrio elegido |
+| `ob_custom` | Perfiles de empleados creados |
+| `ob_reviews` | Opiniones nuevas |
+| `ob_usuario` | Rol y datos del usuario |
+| `ob_pedidos` | Pedidos de trabajo propios |
+| `ob_pagos` | Historial de pagos |
+
+Para empezar de cero, borrá los datos del sitio desde las herramientas del navegador.
+
+## Diseño
+
+| Color | Hex | Uso |
+|---|---|---|
+| Bosque | `#1F4D3A` | Color principal |
+| Terracota | `#C2552D` | Acciones destacadas y trueque |
+| Verde llamada | `#16803F` | Botones de contacto |
+| Menta | `#E2EDE6` | Fondos de tarjetas |
+| Crema | `#F7F2E9` | Fondo general |
+
+- **Tipografía:** Inter, con texto base de 18 px.
+- **Logo:** un pin de barrio con una tuerca, que une "oficio" con "en tu barrio".
+- **Responsive:** menú inferior en celulares, menú superior en computadoras, y listados de 1 a 3 columnas.
+- **Accesibilidad:** botones de al menos 52 px, foco visible, etiquetas para lectores de pantalla y respeto por la preferencia de reducir animaciones.
+
+## Limitaciones y próximos pasos
+
+- [ ] Servidor y base de datos para compartir la información entre personas
+- [ ] Pagos reales con Mercado Pago
+- [ ] Inicio de sesión y verificación de identidad
+- [ ] Opiniones permitidas solo a quienes contrataron al vecino
+- [ ] Fotos de trabajos realizados y mapa de barrios
+- [ ] Notificaciones de nuevos pedidos
+
+## Aviso
+
+Todos los nombres, teléfonos, opiniones y pedidos son ficticios y se incluyen solo con fines demostrativos.
