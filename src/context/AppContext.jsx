@@ -43,7 +43,19 @@ export function AppProvider({ children }) {
   useEffect(() => save('ob_barrio', barrio), [barrio])
   useEffect(() => save('ob_usuario', usuario), [usuario])
   useEffect(() => save('ob_pedidos', pedidosPropios), [pedidosPropios])
+  const [turnos, setTurnos] = useState(() => read('ob_turnos', []))
+  const [favs, setFavs] = useState(() => read('ob_favs', []))
+  const [presus, setPresus] = useState(() => read('ob_presus', []))
   useEffect(() => save('ob_pagos', pagos), [pagos])
+  useEffect(() => save('ob_turnos', turnos), [turnos])
+  useEffect(() => save('ob_favs', favs), [favs])
+  useEffect(() => save('ob_presus', presus), [presus])
+  const addTurno = useCallback((t) => setTurnos((l) => [{ ...t, id: 't' + Date.now(), estado: 'pendiente' }, ...l]), [])
+  const setTurnoEstado = useCallback((id, estado) => setTurnos((l) => l.map((t) => (t.id === id ? { ...t, estado } : t))), [])
+  const removeTurno = useCallback((id) => setTurnos((l) => l.filter((t) => t.id !== id)), [])
+  const toggleFav = useCallback((id) => setFavs((l) => (l.includes(id) ? l.filter((x) => x !== id) : [...l, id])), [])
+  const addPresu = useCallback((p) => setPresus((l) => [{ ...p, id: 'pr' + Date.now(), fecha: new Date().toISOString().slice(0, 10) }, ...l]), [])
+  const removePresu = useCallback((id) => setPresus((l) => l.filter((p) => p.id !== id)), [])
 
   const workers = useMemo(
     () =>
@@ -94,6 +106,7 @@ export function AppProvider({ children }) {
   const value = {
     workers, barrio, setBarrio, addWorker, removeWorker, addReview,
     usuario, setUsuario, pedidos, addPedido, removePedido, pagos, addPago,
+    turnos, addTurno, setTurnoEstado, removeTurno, favs, toggleFav, presus, addPresu, removePresu,
   }
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
