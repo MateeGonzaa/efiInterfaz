@@ -11,7 +11,7 @@ const fecha = (iso) =>
 
 function Comprobante({ pago, onNuevo }) {
   return (
-    <section className="card space-y-4 p-5" aria-live="polite">
+    <section className="card space-y-4 p-4 sm:p-5" aria-live="polite">
       <div className="flex items-center gap-3">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-call">
           <CircleCheck className="h-7 w-7" aria-hidden="true" />
@@ -23,12 +23,12 @@ function Comprobante({ pago, onNuevo }) {
       </div>
       <p className="text-3xl font-bold text-forest">{ars(pago.monto)}</p>
       <dl className="divide-y divide-line text-base">
-        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Para</dt><dd className="text-right font-medium">{pago.nombre}</dd></div>
-        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Servicio</dt><dd className="text-right font-medium">{pago.servicio}</dd></div>
-        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Medio</dt><dd className="text-right font-medium">{pago.metodo}</dd></div>
-        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Fecha</dt><dd className="text-right font-medium">{fecha(pago.fecha)}</dd></div>
+        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Para</dt><dd className="min-w-0 break-words text-right font-medium">{pago.nombre}</dd></div>
+        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Servicio</dt><dd className="min-w-0 break-words text-right font-medium">{pago.servicio}</dd></div>
+        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Medio</dt><dd className="min-w-0 break-words text-right font-medium">{pago.metodo}</dd></div>
+        <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Fecha</dt><dd className="min-w-0 break-words text-right font-medium">{fecha(pago.fecha)}</dd></div>
         {pago.concepto && (
-          <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Detalle</dt><dd className="text-right font-medium">{pago.concepto}</dd></div>
+          <div className="flex justify-between gap-4 py-2"><dt className="text-muted">Detalle</dt><dd className="min-w-0 break-words text-right font-medium">{pago.concepto}</dd></div>
         )}
       </dl>
       <div className="grid gap-3 sm:grid-cols-2">
@@ -72,31 +72,31 @@ export default function Pagos() {
   const Err = ({ k }) => (errors[k] ? <p role="alert" className="mt-1 text-sm font-medium text-terra">{errors[k]}</p> : null)
 
   return (
-    <div className="space-y-6 pt-6 md:pt-10">
+    <div className="min-w-0 space-y-5 pt-5 md:space-y-6 md:pt-10">
       <header className="space-y-1">
         <h1 className="h1">Pagos de servicios</h1>
         <p className="max-w-2xl text-base text-muted">Pagale al vecino que te hizo el trabajo y guardá el comprobante.</p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
-        <div className="space-y-6">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
+        <div className="min-w-0 space-y-5 md:space-y-6">
           {ultimo ? (
             <Comprobante pago={ultimo} onNuevo={() => setUltimo(null)} />
           ) : (
-            <form onSubmit={pagar} noValidate className="card space-y-4 p-5">
+            <form onSubmit={pagar} noValidate className="card space-y-4 p-4 sm:p-5">
               <div>
                 <label htmlFor="p-vecino" className="label">¿A quién le pagás?</label>
                 <select id="p-vecino" className="field" value={f.workerId} onChange={elegirVecino}>
                   <option value="">Elegí un vecino</option>
                   {lista.map((x) => (
-                    <option key={x.id} value={x.id}>{x.nombre} · {tituloDe(x)} ({x.barrio})</option>
+                    <option key={x.id} value={x.id}>{x.nombre} · {tituloDe(x)}</option>
                   ))}
                 </select>
                 <Err k="workerId" />
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
+              <div className="grid min-w-0 gap-4 sm:grid-cols-2">
+                <div className="min-w-0">
                   <label htmlFor="p-monto" className="label">Monto</label>
                   <div className="relative">
                     <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-base font-semibold text-muted">$</span>
@@ -145,7 +145,7 @@ export default function Pagos() {
           </Link>
         </div>
 
-        <section className="space-y-3" aria-labelledby="hist">
+        <section className="min-w-0 space-y-3" aria-labelledby="hist">
           <div className="flex items-baseline justify-between gap-3">
             <h2 id="hist" className="h2">Mis pagos</h2>
             {pagos.length > 0 && <p className="text-sm text-muted">Total: <span className="font-semibold text-ink">{ars(total)}</span></p>}

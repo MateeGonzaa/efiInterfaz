@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import {
   Flame, Zap, Droplets, Scissors, Hammer, PaintRoller, Leaf, HardHat, Wrench,
-  Star, CircleCheck, Repeat, Phone, MessageCircle, Banknote, Landmark, Smartphone,
+  Star, CircleCheck, Repeat, Phone, MessageCircle, Banknote, Landmark, Smartphone, Heart,
 } from 'lucide-react'
 import { OFICIOS } from '../data/seed'
+import { useApp } from '../context/AppContext'
 
 /* ---------- utilidades ---------- */
 const ICONS = { Flame, Zap, Droplets, Scissors, Hammer, PaintRoller, Leaf, HardHat }
@@ -130,9 +131,21 @@ export function ContactButtons({ w, large = false }) {
   )
 }
 
+export function FavButton({ id }) {
+  const { favs, toggleFav } = useApp()
+  const on = favs.includes(id)
+  return (
+    <button onClick={() => toggleFav(id)} aria-pressed={on} aria-label={on ? 'Quitar de favoritos' : 'Guardar en favoritos'}
+      className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 transition hover:bg-terra-soft active:scale-90">
+      <Heart className={`h-6 w-6 ${on ? 'fill-terra text-terra' : 'text-muted'}`} aria-hidden="true" />
+    </button>
+  )
+}
+
 export function WorkerCard({ w }) {
   return (
-    <article className="card space-y-3 p-4">
+    <article className="card relative space-y-3 p-4 transition hover:-translate-y-0.5 hover:shadow-md">
+      <FavButton id={w.id} />
       <Link to={`/vecino/${w.id}`} className="flex items-center gap-3 rounded-xl">
         <Avatar name={w.nombre} />
         <div className="min-w-0">

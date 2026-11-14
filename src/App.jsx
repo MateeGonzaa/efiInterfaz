@@ -8,6 +8,9 @@ import Vecino from './pages/Vecino'
 import Trueque from './pages/Trueque'
 import Pagos from './pages/Pagos'
 import MiPerfil from './pages/MiPerfil'
+import Panel from './pages/Panel'
+import Agenda from './pages/Agenda'
+import Presupuestos from './pages/Presupuestos'
 
 const TITULOS = {
   '/': 'Oficios Barriales',
@@ -15,6 +18,9 @@ const TITULOS = {
   '/trueque': 'Trueque de servicios',
   '/pagos': 'Pagos de servicios',
   '/mi-perfil': 'Mi perfil',
+  '/panel': 'Mi panel',
+  '/agenda': 'Agenda de turnos',
+  '/presupuestos': 'Presupuestos',
 }
 
 function ScrollTop() {
@@ -50,6 +56,9 @@ export default function App() {
             <Route path="/trueque" element={<Trueque />} />
             <Route path="/pagos" element={<Pagos />} />
             <Route path="/mi-perfil" element={<MiPerfil />} />
+            <Route path="/panel" element={<Panel />} />
+            <Route path="/agenda" element={<Agenda />} />
+            <Route path="/presupuestos" element={<Presupuestos />} />
             {/* enlaces de versiones anteriores */}
             <Route path="/sumate" element={<Navigate to="/mi-perfil" replace />} />
             <Route path="/perfil/:id" element={<Navigate to="/buscar" replace />} />
